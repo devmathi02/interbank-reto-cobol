@@ -1,66 +1,51 @@
-# Reto Técnico: Procesamiento de Transacciones Bancarias (CLI)
+# Solución Reto Técnico: Procesamiento de Transacciones Bancarias (CLI)
 
-## Objetivo:
+## Introduccion:
 
-Desarrolla una aplicación de línea de comandos (CLI) que procese un archivo CSV con transacciones bancarias y genere un reporte que incluya:
+Este proyecto es la solución al Reto Técnico Cobol, mi solucion analiza el reporte de las transacciones financieras en formato CSV. El proposito es calcular el balance final, encontrar la transaccion con el monto mayor y contar la cantidad de transacciones que hay del tipo Crédito y Débito.
 
-- **Balance Final:**  
-  Suma de los montos de las transacciones de tipo "Crédito" menos la suma de los montos de las transacciones de tipo "Débito".
-
-- **Transacción de Mayor Monto:**  
-  Identificar el ID y el monto de la transacción con el valor más alto.
-
-- **Conteo de Transacciones:**  
-  Número total de transacciones para cada tipo ("Crédito" y "Débito").
+Se hizo un fork como se pidio en las instrucciones del repositorio base:
+`https://github.com/codeableorg/interbank-academy-25`
 
 ---
 
-## Instrucciones
+## Instrucciones de Ejecucion
 
-1. **Repositorio Base:**  
-   Clona o haz un fork del repositorio base disponible en:  
-   `https://github.com/codeableorg/interbank-academy-25`
+1. **Lenguaje y Dependencias**  
+   El lenguaje a utilizar es Python, para ellos debe asegurarse de tenerlo instalado o actualizado en su sistema, para ello le adjunto el link de la pagina oficial si en caso no lo tuviera: 
+   `https://www.python.org/downloads/`
 
-2. **Entrada de Datos:**  
-   La aplicación deberá leer un archivo CSV. Ejemplo de contenido:
+   Tambien mencionar que la libreria a utilizar en CSV, no es necesaria su instalación ya que viene incluida en Python.
 
+
+2. **Ejecucion del Programa**  
+   - Cambie y Guarde el archivo de las transacciones en formato CSV en la misma ruta dónde se encuentra el archivo `reto-tecnico-cobol.py`.
+   - En el archivo  `reto-tecnico-cobol.py` cambie la variable de `data.csv` por el nombre del archivo que guardo anteriormente, guarde los cambios y ejecute el programa.
+   
+
+3. **Enfoque y Solución**  
+   El código realiza los siguientes pasos:
+   
+
+   1. Carga los datos del archivo CSV usando la `codificación utf-8-sig`, permitiendo manejar el archivo en caso de tener BOM.
+
+   2. Se usan los acumuladores (credito, debito) para calcular el total de cada tipo de transaccion y contadores (cont_credito, cont_debito) para llevar el registro de la cantidad de operaciones, por ultimo la variable (id_max_monto) para encontrar la transaccion más alta.
+
+   3. se corre cada fila del archivo como un diccionario, donde se convierten el monto a float y normlaiza el campo tipo, clasificamos las transacciones como crédito o débito, actuliazando los acumuladores y contadores, luego se verifica el monto actual es mayor que el maximo encontrado hasta ahora, si lo es se actualiza el valor con su id.
+
+   4. Utilizamos un try-except para capturar errores en la conversion de monto, por ejemplo si no es un número valido.
+
+   5. Por ultimo se imprime el reporte con el balace final (créditos - débitos), la transaccion con el monto mayor y su id y el conteo de las transacciones por su tipo.
+
+4. **Estructura del Proyecto**  
+   ```sh
+   /data.csv                  
+   /README.md                 
+   /reto-tecnico-cobol.py     
    ```
-   id,tipo,monto
-   1,Crédito,100.00
-   2,Débito,50.00
-   3,Crédito,200.00
-   4,Débito,75.00
-   5,Crédito,150.00
-   ```
 
-3. **Salida del Programa:**  
-   La aplicación debe mostrar el reporte final en la terminal.  
-   Ejemplo de salida:
+5. **Documentacion y Calidad del código**  
+   - Los comentarios realizados en el código son utiles y ayudan a entender la funcion del script.
+   - Trabajan con variables que poseen nombres descriptivos, que facilitan su proposito.
+   - El código realiza buenas practicas, tanto en el uso de `with open` que asegura el script cierre correctamente, normalización de datos con `strip y lower` y manejo de errores con `try-except`. 
 
-   ```
-   Reporte de Transacciones
-   ---------------------------------------------
-   Balance Final: 325.00
-   Transacción de Mayor Monto: ID 3 - 200.00
-   Conteo de Transacciones: Crédito: 3 Débito: 2
-   ```
-
-4. **Lenguaje de Programación:**  
-   Utiliza el lenguaje de tu preferencia. Opciones recomendadas:
-
-   - Python
-   - Java
-   - C#
-   - JavaScript (Node.js)
-
-5. **README del Proyecto:**  
-   Incluye un archivo `README.md` con la siguiente estructura:
-
-   - **Introducción:** Breve descripción del reto y su propósito.
-   - **Instrucciones de Ejecución:** Cómo instalar dependencias y ejecutar la aplicación.
-   - **Enfoque y Solución:** Lógica implementada y decisiones de diseño.
-   - **Estructura del Proyecto:** Archivos y carpetas principales.
-
-6. **Documentación y Calidad del Código:**
-   - Código bien documentado y fácil de leer.
-   - Comentarios explicando pasos clave y lógica del programa.
